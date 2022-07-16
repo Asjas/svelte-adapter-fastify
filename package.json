@@ -1,18 +1,46 @@
 {
   "name": "svelte-adapter-fastify",
-  "author": "A-J Roos <asjas@hey.com>",
+  "author": "A-J Roos <asjas@outlook.com>",
+  "version": "0.0.0",
   "description": "SvelteKit Adapter for Fastify.",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "source": "./src/index.ts",
+  "module": "./dist/svelte-adapter-fastify.esm.js",
+  "files": [
+    "src",
+    "dist"
+  ],
   "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "clean": "rimraf dist",
+    "prepare": "tsdx build",
+    "test": "vitest run",
+    "test:w": "vitest watch",
+    "coverage": "c8 --reporter=lcov vitest run --coverage",
+    "check-types": "tsc",
     "lint": "eslint --ext .ts .",
     "lint-fix": "npm run lint -- --fix",
     "prettier": "prettier --ignore-path .eslintignore \"**/*.+(ts)\"",
     "format": "npm run prettier -- --write",
     "check-format": "npm run prettier -- --list-different",
+    "validate": "npm-run-all --parallel check-types check-format lint build"
+  },
+  "dependencies": {
+    "@fastify/static": "6.4.0"
   },
   "devDependencies": {
+    "@types/node": "18.0.5",
+    "c8": "7.11.3",
     "eslint-config-asjas": "2.0.3",
     "husky": "8.0.1",
     "lint-staged": "13.0.3",
+    "npm-run-all": "4.1.5",
+    "tsdx": "0.14.1",
+    "typescript": "4.7.4",
+    "vitest": "0.18.0"
   },
   "husky": {
     "hooks": {
@@ -27,6 +55,9 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "engines": {
+    "node": "^16.x || ^18.x"
   },
   "bugs": {
     "url": "https://github.com/Asjas/svelte-adapter-fastify/issues"
