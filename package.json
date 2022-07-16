@@ -1,0 +1,35 @@
+{
+  "name": "svelte-adapter-fastify",
+  "author": "A-J Roos <asjas@hey.com>",
+  "description": "SvelteKit Adapter for Fastify.",
+  "scripts": {
+    "lint": "eslint --ext .ts .",
+    "lint-fix": "npm run lint -- --fix",
+    "prettier": "prettier --ignore-path .eslintignore \"**/*.+(ts)\"",
+    "format": "npm run prettier -- --write",
+    "check-format": "npm run prettier -- --list-different",
+  },
+  "devDependencies": {
+    "eslint-config-asjas": "2.0.3",
+    "husky": "8.0.1",
+    "lint-staged": "13.0.3",
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run check-types && lint-staged && npm run build"
+    }
+  },
+  "lint-staged": {
+    "*.+(ts)": [
+      "eslint"
+    ],
+    "**/**/*.+(ts)": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "bugs": {
+    "url": "https://github.com/Asjas/svelte-adapter-fastify/issues"
+  },
+  "homepage": "https://github.com/Asjas/svelte-adapter-fastify#readme"
+}
