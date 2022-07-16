@@ -1,7 +1,7 @@
 {
   "name": "svelte-adapter-fastify",
   "author": "A-J Roos <asjas@outlook.com>",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "SvelteKit Adapter for Fastify.",
   "license": "MIT",
   "main": "./dist/index.js",
