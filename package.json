@@ -16,6 +16,12 @@
   "types": "./dist/index.d.ts",
   "source": "./src/index.ts",
   "module": "./dist/svelte-adapter-fastify.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/svelte-adapter-fastify.esm.js",
+      "require": "./dist/index.js"
+    }
+  },
   "files": [
     "src",
     "dist"
