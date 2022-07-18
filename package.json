@@ -3,6 +3,14 @@
   "author": "A-J Roos <asjas@outlook.com>",
   "version": "0.0.1",
   "description": "SvelteKit Adapter for Fastify.",
+  "keywords": [
+    "fastify",
+    "fastify-plugin",
+    "sveltekit",
+    "svelte-adapter",
+    "svelte-adapter-fastify",
+    "fastify-sveltekit"
+  ],
   "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
