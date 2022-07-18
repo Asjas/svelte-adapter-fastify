@@ -1,7 +1,7 @@
 {
   "name": "svelte-adapter-fastify",
   "author": "A-J Roos <asjas@outlook.com>",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "SvelteKit Adapter for Fastify.",
   "keywords": [
     "fastify",
