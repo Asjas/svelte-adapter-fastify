@@ -19,6 +19,7 @@
 
 | Adapter Version | SvelteKit Version |
 | --------------- | ----------------- |
+| `0.0.11`        | `1.0.0-next.377`  |
 | `0.0.10`        | `1.0.0-next.377`  |
 
 **Note**: only the versions listed have been tested together, if others happen to work, it is just coincidence. This is
