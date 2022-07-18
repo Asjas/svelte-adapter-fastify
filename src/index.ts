@@ -4,7 +4,8 @@ const { copyFileSync } = require('node:fs');
 function svelteAdapterFastify({
   out = 'build',
   assets = 'assets',
-  serverFile = `${join(__dirname, '/..')}/files/server.js`
+  serverFile = `${join(__dirname, '/..')}/files/server.js`,
+  startFile = `${join(__dirname, '/..')}/files/index.js`,
 } = {}) {
   const adapter = {
     name: 'svelte-adapter-fastify',
@@ -18,7 +19,8 @@ function svelteAdapterFastify({
       builder.log.minor('Copying server');
       builder.writeServer(out);
 
-      copyFileSync(serverFile, `${out}/index.js`);
+      copyFileSync(serverFile, `${out}/server.js`);
+      copyFileSync(startFile, `${out}/index.js`);
 
       builder.log.minor('Prerendering static pages');
       await builder.writePrerendered(`${out}/prerendered`);
