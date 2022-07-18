@@ -14,8 +14,7 @@ const {
 
 const app = fastify({ logger: true });
 
-await app.register(fastifyStatic, { root: ASSETS });
-await app.register(fastifyStatic, { root: PRERENDERED, decorateReply: false });
+await app.register(fastifyStatic, { root: [ASSETS, PRERENDERED] });
 
 // Your own routes here
 
