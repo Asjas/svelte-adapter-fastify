@@ -7,7 +7,23 @@
 [![Main WorkFlow](https://github.com/Asjas/svelte-adapter-fastify/actions/workflows/main.yml/badge.svg)](https://github.com/Asjas/svelte-adapter-fastify/actions/workflows/main.yml)
 [![CodeQL WorkFlow](https://github.com/Asjas/svelte-adapter-fastify/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Asjas/svelte-adapter-fastify/actions/workflows/codeql-analysis.yml)
 
+<div align="center">
+
 `svelte-adapter-fastify` is a [SvelteKit](https://kit.svelte.dev/docs/introduction) plugin for the [Fastify](https://github.com/fastify/fastify) framework.
+
+| :warning: WARNING: This project is considered to be in `BETA` until SvelteKit is available for general use and the Adapter API is stable! |
+| --------------------------------------------------------------------------------------------------------------------------------------- |
+
+## Beta Adapter Version Compatibility
+
+| Adapter Version | SvelteKit Version    |
+| --------------- | -------------------- |
+| `0.0.10`        | `1.0.0-next.377`     |
+
+**Note**: only the versions listed have been tested together, if others happen
+to work, it is just coincidence. This is beta software after all.
+
+</div>
 
 ## Supported Fastify versions
 
@@ -40,7 +56,7 @@ or `pnpm`:
 pnpm add --save-exact svelte-adapter-fastify
 ```
 
-## Configuration
+## Setup
 
 Replace the default `@sveltejs/adapter-auto` with `svelte-adapter-fastify` in the `svelte.config.js` file:
 
@@ -56,11 +72,10 @@ const config = {
 -   adapter: adapter(),
 +   adapter: fastifyAdapter(),
   },
-	methodOverride: {
-		allowed: ['PATCH', 'DELETE']
-	}
+  methodOverride: {
+    allowed: ['PATCH', 'DELETE'],
+  }
 };
-
 
 export default config;
 ```
@@ -79,7 +94,7 @@ PORT=3000 node ./build/index.js
 
 ## Custom Fastify Server
 
-To run a customized server, start by copying the default server from the module:
+To run a customized server, start by copying the default server from the `svelte-adapter-fastify` module:
 
 ```sh
 mkdir -p adapter/fastify
@@ -105,8 +120,8 @@ const config = {
     }),
   },
   methodOverride: {
-		allowed: ['PATCH', 'DELETE']
-	}
+    allowed: ['PATCH', 'DELETE'],
+  }
 };
 
 export default config;
