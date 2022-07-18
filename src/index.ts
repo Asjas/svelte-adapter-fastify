@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-var-requires: 0 */
 const { join } = require("node:path");
 const { copyFileSync } = require("node:fs");
 
@@ -20,8 +21,8 @@ function svelteAdapterFastify({
       builder.writeStatic(staticDirectory);
       builder.writePrerendered(`${out}/prerendered`);
 
-      copyFileSync(serverFile, `${out}/server.js`);
-      copyFileSync(startFile, `${out}/index.js`);
+      copyFileSync(startFile, `${out}/server/index.js`);
+      copyFileSync(serverFile, `${out}/server/server.js`);
     },
   };
 

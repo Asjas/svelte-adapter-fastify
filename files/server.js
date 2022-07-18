@@ -2,7 +2,7 @@ import fastifyCompress from "@fastify/compress";
 import fastifyStatic from "@fastify/static";
 
 // This `manifest` file is created during the build process
-import { manifest } from "./server/manifest.js";
+import { manifest } from "./manifest.js";
 
 async function buildServer(server, opts) {
   await server.register(fastifyCompress);

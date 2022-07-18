@@ -19,6 +19,9 @@
 
 | Adapter Version | SvelteKit Version |
 | --------------- | ----------------- |
+| `0.0.14`        | `1.0.0-next.377`  |
+| `0.0.13`        | `1.0.0-next.377`  |
+| `0.0.12`        | `1.0.0-next.377`  |
 | `0.0.11`        | `1.0.0-next.377`  |
 | `0.0.10`        | `1.0.0-next.377`  |
 
@@ -88,10 +91,10 @@ Then:
 npm run build
 ```
 
-Which will generate the Fastify server `./build/index.js` which can be run:
+Which will generate the Fastify server `./build/server/index.js` which can be run:
 
 ```
-PORT=3000 node ./build/index.js
+PORT=3000 node ./build/server/index.js
 ```
 
 ## Custom Fastify Server
@@ -104,11 +107,18 @@ cp node_modules/svelte-adapter-fastify/files/index.js adapter/fastify
 cp node_modules/svelte-adapter-fastify/files/server.js adapter/fastify
 ```
 
-Edit the `server.js` and `index.js` files to meet your needs. You can add `routes` and other `plugins` to the custom
-Fastify server. By default the server will listen on `localhost`, if you are deploying on GCP or in a Dockerfile then
-you would need to set the `HOST` environment variable to `0.0.0.0`.
+Edit the `adapter/fastify/index.js` and `adapter/fastify/index.js` files to meet your needs. You can add `routes` and
+other `plugins` to the custom Fastify server.
 
-_A very important note: Any changes to the `index.js` or `server.js` file will only reflect after a new build._
+By default the server will listen on `localhost`, if you are deploying on GCP or in a Dockerfile then you would need to
+set the `HOST` environment variable to `0.0.0.0`.
+
+```sh
+HOST=0.0.0.0 PORT=3000 node ./build/server/index.js
+```
+
+_A very important note: Any changes to the `adapter/fastify/index.js` or `adapter/fastify/server.js` file will only
+reflect after a new build._
 
 At build time refer to this custom server. When configuring the adapter in `svelte.config.js`, add both `serverFile` and
 `startFile` parameters:
@@ -140,5 +150,5 @@ Build / Run as normal
 
 ```sh
 npm run build
-PORT=3000 node ./build/index.js
+PORT=3000 node ./build/server/index.js
 ```
