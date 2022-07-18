@@ -40,20 +40,29 @@ or `pnpm`:
 pnpm add --save-exact svelte-adapter-fastify
 ```
 
-## Installation instructions
+## Configuration
 
 Replace the default `@sveltejs/adapter-auto` with `svelte-adapter-fastify` in the `svelte.config.js` file:
 
 ```diff
+import preprocess from 'svelte-preprocess';
 - import adapter from '@sveltejs/adapter-auto';
 + import fastifyAdapter from "svelte-adapter-fastify";
 
-module.exports = {
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+  preprocess: preprocess(),
   kit: {
 -   adapter: adapter(),
 +   adapter: fastifyAdapter(),
   },
+	methodOverride: {
+		allowed: ['PATCH', 'DELETE']
+	}
 };
+
+
+export default config;
 ```
 
 Then:
@@ -68,7 +77,7 @@ Which will generate the Fastify server `./build/index.js` which can be run:
 PORT=3000 node ./build/index.js
 ```
 
-## Custom Server
+## Custom Fastify Server
 
 To run a customized server, start by copying the default server from the module:
 
@@ -82,19 +91,25 @@ Edit the `server.js` to meet your needs. You can add `compression`, `routes` and
 At build time refer to this custom server. When configuring the adapter in `svelte.config.js`, add a `serverFile` parameter:
 
 ```diff
-+import path from 'node:path';
-+const __dirname = path.resolve();
 import preprocess from 'svelte-preprocess';
 import fastifyAdapter from 'svelte-adapter-fastify';
++ import path from 'node:path';
+
++ const __dirname = path.resolve();
 
 const config = {
+  preprocess: preprocess(),
   kit: {
-    preprocess: preprocess(),
     adapter: fastifyAdapter({
 +     serverFile: path.join(__dirname, './adapter/fastify/server.js')
     }),
   },
+  methodOverride: {
+		allowed: ['PATCH', 'DELETE']
+	}
 };
+
+export default config;
 ```
 
 Build / Run as normal
