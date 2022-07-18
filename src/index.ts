@@ -18,9 +18,6 @@ function svelteAdapterFastify({
       builder.log.minor('Copying server');
       builder.writeServer(out);
 
-      console.log('__dirname', __dirname);
-      console.log('out', out);
-
       copyFileSync(serverFile, `${out}/index.js`);
 
       builder.log.minor('Prerendering static pages');
