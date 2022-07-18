@@ -15,8 +15,18 @@ const {
   await server.register(fastifyCompress);
 
 const app = fastify({ logger: true });
+    // Set cache headers for Svelte resources
+    setHeaders: (res, path) => {
+      if (path.includes(`${manifest.appDir}/immutable/`)) {
+        res.setHeader("Cache-Control", "public, immutable, max-age=31536000");
+      } else {
+        res.setHeader("Cache-Control", "no-cache");
+      }
 
 await app.register(fastifyStatic, { root: [ASSETS, PRERENDERED] });
+      return res;
+    },
+  });
 
 // Your own routes here
 
