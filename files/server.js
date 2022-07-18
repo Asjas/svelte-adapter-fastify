@@ -1,4 +1,5 @@
 import fastify from "fastify";
+import fastifyCompress from "@fastify/compress";
 import fastifyStatic from "@fastify/static";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,6 +12,7 @@ const {
   ASSETS = join(__dirname, "assets"),
   PRERENDERED = join(__dirname, "prerendered"),
 } = process.env;
+  await server.register(fastifyCompress);
 
 const app = fastify({ logger: true });
 

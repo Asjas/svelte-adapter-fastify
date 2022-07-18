@@ -43,6 +43,7 @@
     "validate": "npm-run-all --parallel check-types check-format lint build"
   },
   "dependencies": {
+    "@fastify/compress": "6.1.0",
     "@fastify/static": "6.4.0",
     "fastify": "4.2.1"
   },
