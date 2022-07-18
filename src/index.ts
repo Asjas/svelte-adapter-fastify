@@ -4,7 +4,7 @@ const { copyFileSync } = require('node:fs');
 function svelteAdapterFastify({
   out = 'build',
   assets = 'assets',
-  serverFile = `${__dirname}/../files/server.js`
+  serverFile = `${join(__dirname, '/..')}/files/server.js`
 } = {}) {
   const adapter = {
     name: 'svelte-adapter-fastify',
