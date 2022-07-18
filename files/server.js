@@ -2,9 +2,9 @@ import fastifyCompress from "@fastify/compress";
 import fastifyStatic from "@fastify/static";
 
 // This `manifest` file is created during the build process
-import manifest from "./manifest.js";
+import { manifest } from "./server/manifest.js";
 
-async function buildServer({ server, opts }) {
+async function buildServer(server, opts) {
   await server.register(fastifyCompress);
 
   await server.register(fastifyStatic, {
@@ -22,6 +22,8 @@ async function buildServer({ server, opts }) {
   });
 
   // Your own routes or plugins here
+
+  return server;
 }
 
 export default buildServer;
