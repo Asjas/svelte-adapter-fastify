@@ -9,19 +9,20 @@
 
 <div align="center">
 
-`svelte-adapter-fastify` is a [SvelteKit](https://kit.svelte.dev/docs/introduction) plugin for the [Fastify](https://github.com/fastify/fastify) framework.
+`svelte-adapter-fastify` is a [SvelteKit](https://kit.svelte.dev/docs/introduction) plugin for the
+[Fastify](https://github.com/fastify/fastify) framework.
 
 | :warning: WARNING: This project is considered to be in `BETA` until SvelteKit is available for general use and the Adapter API is stable! |
-| --------------------------------------------------------------------------------------------------------------------------------------- |
+| ----------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## Beta Adapter Version Compatibility
 
-| Adapter Version | SvelteKit Version    |
-| --------------- | -------------------- |
-| `0.0.10`        | `1.0.0-next.377`     |
+| Adapter Version | SvelteKit Version |
+| --------------- | ----------------- |
+| `0.0.10`        | `1.0.0-next.377`  |
 
-**Note**: only the versions listed have been tested together, if others happen
-to work, it is just coincidence. This is beta software after all.
+**Note**: only the versions listed have been tested together, if others happen to work, it is just coincidence. This is
+beta software after all.
 
 </div>
 
@@ -98,12 +99,18 @@ To run a customized server, start by copying the default server from the `svelte
 
 ```sh
 mkdir -p adapter/fastify
+cp node_modules/svelte-adapter-fastify/files/index.js adapter/fastify
 cp node_modules/svelte-adapter-fastify/files/server.js adapter/fastify
 ```
 
-Edit the `server.js` to meet your needs. You can add `compression`, `routes` and other `plugins` to the custom Fastify server.
+Edit the `server.js` and `index.js` files to meet your needs. You can add `routes` and other `plugins` to the custom
+Fastify server. By default the server will listen on `localhost`, if you are deploying on GCP or in a Dockerfile then
+you would need to set the `HOST` environment variable to `0.0.0.0`.
 
-At build time refer to this custom server. When configuring the adapter in `svelte.config.js`, add a `serverFile` parameter:
+_A very important note: Any changes to the `index.js` or `server.js` file will only reflect after a new build._
+
+At build time refer to this custom server. When configuring the adapter in `svelte.config.js`, add both `serverFile` and
+`startFile` parameters:
 
 ```diff
 import preprocess from 'svelte-preprocess';
@@ -116,7 +123,8 @@ const config = {
   preprocess: preprocess(),
   kit: {
     adapter: fastifyAdapter({
-+     serverFile: path.join(__dirname, './adapter/fastify/server.js')
++     serverFile: path.join(__dirname, './adapter/fastify/server.js'),
++     startFile: path.join(__dirname, './adapter/fastify/index.js'),
     }),
   },
   methodOverride: {
@@ -132,4 +140,4 @@ Build / Run as normal
 ```sh
 npm run build
 PORT=3000 node ./build/index.js
-````
+```
