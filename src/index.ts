@@ -1,33 +1,31 @@
 const { join } = require("node:path");
-const { copyFileSync } = require('node:fs');
+const { copyFileSync } = require("node:fs");
 
 function svelteAdapterFastify({
-  out = 'build',
-  assets = 'assets',
-  serverFile = `${join(__dirname, '/..')}/files/server.js`,
-  startFile = `${join(__dirname, '/..')}/files/index.js`,
+  out = "build",
+  assets = "assets",
+  serverFile = `${join(__dirname, "/..")}/files/server.js`,
+  startFile = `${join(__dirname, "/..")}/files/index.js`,
 } = {}) {
   const adapter = {
-    name: 'svelte-adapter-fastify',
+    name: "svelte-adapter-fastify",
 
-    async adapt(builder) {
+    adapt(builder) {
+      builder.rimraf(out);
+
       builder.log.minor(`Copying assets to ${assets}`);
       const staticDirectory = join(out, assets);
-      builder.writeClient(staticDirectory);
+      builder.writeClient(`${out}/client`);
+      builder.writeServer(`${out}/server`);
       builder.writeStatic(staticDirectory);
-
-      builder.log.minor('Copying server');
-      builder.writeServer(out);
+      builder.writePrerendered(`${out}/prerendered`);
 
       copyFileSync(serverFile, `${out}/server.js`);
       copyFileSync(startFile, `${out}/index.js`);
-
-      builder.log.minor('Prerendering static pages');
-      await builder.writePrerendered(`${out}/prerendered`);
-    }
+    },
   };
 
   return adapter;
-};
+}
 
 module.exports = svelteAdapterFastify;
