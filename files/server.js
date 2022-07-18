@@ -1,20 +1,14 @@
-import fastify from "fastify";
 import fastifyCompress from "@fastify/compress";
 import fastifyStatic from "@fastify/static";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// This `manifest` file is created during the build process
+import manifest from "./manifest.js";
 
-const {
-  PORT = 3000, // eslint-disable-line no-magic-numbers
-  ASSETS = join(__dirname, "assets"),
-  PRERENDERED = join(__dirname, "prerendered"),
-} = process.env;
+async function buildServer({ server, opts }) {
   await server.register(fastifyCompress);
 
-const app = fastify({ logger: true });
+  await server.register(fastifyStatic, {
+    root: opts.paths,
     // Set cache headers for Svelte resources
     setHeaders: (res, path) => {
       if (path.includes(`${manifest.appDir}/immutable/`)) {
@@ -23,11 +17,11 @@ const app = fastify({ logger: true });
         res.setHeader("Cache-Control", "no-cache");
       }
 
-await app.register(fastifyStatic, { root: [ASSETS, PRERENDERED] });
       return res;
     },
   });
 
-// Your own routes here
+  // Your own routes or plugins here
+}
 
-await app.listen({ port: Number(PORT) });
+export default buildServer;
