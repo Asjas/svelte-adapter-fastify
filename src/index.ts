@@ -1,11 +1,7 @@
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
-import { copyFileSync } from 'node:fs';
+const { join } = require("node:path");
+const { copyFileSync } = require('node:fs');
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-export default function svelteAdapterFastify({
+function svelteAdapterFastify({
   out = 'build',
   assets = 'assets',
   serverFile = `${__dirname}/files/server.js`
@@ -31,3 +27,5 @@ export default function svelteAdapterFastify({
 
   return adapter;
 };
+
+module.exports = svelteAdapterFastify;

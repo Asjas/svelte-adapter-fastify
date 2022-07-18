@@ -3,9 +3,9 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "incremental": true,
-    "target": "ES2022",
-    "module": "ESNext",
-    "lib": ["ESNEXT"],
+    "target": "ES2017",
+    "module": "ES2015",
+    "lib": ["ES2017"],
     "noEmit": true,
     "moduleResolution": "Node",
     "esModuleInterop": true,
