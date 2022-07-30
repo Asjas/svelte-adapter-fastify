@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@fastify/compress": "6.1.0",
-    "@fastify/static": "6.4.0",
+    "@fastify/static": "6.5.0",
     "fastify": "4.2.1"
   },
   "devDependencies": {
